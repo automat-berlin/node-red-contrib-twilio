@@ -1,0 +1,17 @@
+{
+  "name": "@automat-berlin/node-red-contrib-twilio",
+  "version": "0.0.1",
+  "homepage": "https://automat.berlin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/automat-berlin/node-red-contrib-twilio"
+  },
+  "bugs": {
+    "url": "https://github.com/automat-berlin/node-red-contrib-twilio/issues",
+    "email": "info@automat.berlin"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
