@@ -11,7 +11,11 @@
     "email": "info@automat.berlin"
   },
   "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.5.1"
+  },
   "scripts": {
+    "lint": "node_modules/.bin/eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
