@@ -13,11 +13,26 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^6.5.1",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
     "prettier": "^1.18.2"
   },
   "scripts": {
     "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{html,js,md}": [
+      "prettier --list-different"
+    ],
+    ".": [
+      "eslint"
+    ]
   }
 }
