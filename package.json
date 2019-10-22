@@ -12,9 +12,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^6.5.1"
+    "eslint": "^6.5.1",
+    "prettier": "^1.18.2"
   },
   "scripts": {
+    "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
