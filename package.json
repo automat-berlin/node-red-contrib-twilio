@@ -11,16 +11,27 @@
     "email": "info@automat.berlin"
   },
   "license": "MIT",
+  "node-red": {
+    "nodes": {
+      "webhook": "nodes/webhook.js"
+    }
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0"
+  },
   "devDependencies": {
     "eslint": "^6.5.1",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
+    "mocha": "^6.2.2",
+    "node-red": "^1.0.2",
+    "node-red-node-test-helper": "^0.2.3",
     "prettier": "^1.18.2"
   },
   "scripts": {
     "format": "node_modules/.bin/prettier --write \"**/*.{html,js,md}\"",
     "lint": "node_modules/.bin/eslint --fix .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/mocha \"test/**/*_spec.js\""
   },
   "husky": {
     "hooks": {
