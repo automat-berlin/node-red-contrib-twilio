@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  RED.nodes.registerType('play', {
+    category: 'twilio',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      url: { value: '', required: true },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'play';
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="play">
+  <div class="form-row">
+    <label for="node-input-url"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-url" placeholder="Sound file URL">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="play">
+  <p>Play a given sound file.</p>
+  <p>Afterwards the call is hung up.</p>
+</script>
