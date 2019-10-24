@@ -1,0 +1,13 @@
+{
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "DO NOT CHANGE. Leave \"false\" here.",
+      "value": "false",
+      "required": true
+    },
+    "APP_NAME": {
+      "description": "Repeat app name to make it available inside the app.",
+      "required": true
+    }
+  }
+}
