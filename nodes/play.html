@@ -5,12 +5,17 @@
     defaults: {
       name: { value: '' },
       url: { value: '', required: true },
+      output: { value: 'off' },
+      outputs: { value: 0 },
     },
     inputs: 1,
     outputs: 0,
     icon: 'file.png',
     label: function() {
       return this.name || 'play';
+    },
+    oneditsave: function() {
+      $('#node-input-outputs').val($('#node-input-output').val() === 'off' ? 0 : 1);
     },
   });
 </script>
@@ -21,9 +26,17 @@
     <input type="text" id="node-input-url" placeholder="Sound file URL">
   </div>
   <div class="form-row">
+    <label for="node-input-output"><i class="fa fa-tag"></i> Output</label>
+    <select id="node-input-output">
+        <option value="off">No output</option>
+        <option value="next">Next action</option>
+    </select>
+  </div>
+  <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
+  <input type="hidden" id="node-input-outputs" />
 </script>
 
 <script type="text/x-red" data-help-name="play">

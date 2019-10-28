@@ -20,7 +20,7 @@ describe('play node', function() {
   shared.shouldLoadCorrectly(playNode, 'play');
 
   it('should respond with proper XML', function(done) {
-    var flow = [{ id: 'n1', type: 'play', url: 'http://example.com/example.wav' }];
+    var flow = [{ id: 'n1', type: 'play', url: 'http://example.com/example.wav', output: 'off' }];
     var xml = fs.readFileSync('test/resources/xml/play.xml', 'utf8');
     helper.load(playNode, flow, function() {
       var n1 = helper.getNode('n1');
