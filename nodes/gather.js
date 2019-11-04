@@ -14,7 +14,13 @@ module.exports = function(RED) {
       if (node.sound && node.sound == 'url' && node.soundUrl) {
         gather.play(node.soundUrl);
       } else if (node.sound && node.sound == 'tts' && node.tts.text) {
-        gather.say(node.tts.text);
+        gather.say(
+          {
+            voice: node.tts.voice,
+            language: node.tts.language,
+          },
+          node.tts.text
+        );
       }
       msg.payload = response.toString();
       msg.res._res.set('Content-Type', 'application/xml');

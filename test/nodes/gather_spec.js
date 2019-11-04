@@ -47,7 +47,10 @@ describe('gather node', function() {
   });
 
   it('should respond with proper XML for Text-to-Speech', function(done) {
-    var flow = [{ id: 'n1', type: 'gather', sound: 'tts', tts: 'n2' }, { id: 'n2', type: 'tts', text: 'hello' }];
+    var flow = [
+      { id: 'n1', type: 'gather', sound: 'tts', tts: 'n2' },
+      { id: 'n2', type: 'tts', text: 'hello', voice: 'alice', language: 'en-US' },
+    ];
     var testNodes = [ttsNode, gatherNode];
     var xml = fs.readFileSync('test/resources/xml/gather_tts.xml', 'utf8');
     helper.load(testNodes, flow, function() {
