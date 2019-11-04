@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('gather', {
+    category: 'twilio',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'gather';
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="gather">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="gather">
+  <p>Collects digits that a caller enters with the telephone keypad.</p>
+</script>
