@@ -6,6 +6,7 @@
       name: { value: '' },
       sound: { value: 'none' },
       soundUrl: { value: '' },
+      tts: { value: '', type: 'tts', required: false },
     },
     inputs: 1,
     outputs: 0,
@@ -17,6 +18,7 @@
       $('#node-input-sound').change(function(e) {
         var val = $(this).val();
         $('.node-row-soundUrl').toggle(val === 'url');
+        $('.node-row-tts').toggle(val === 'tts');
       });
     },
   });
@@ -28,12 +30,19 @@
     <select id="node-input-sound">
         <option value="none">No sound</option>
         <option value="url">Sound URL</option>
+        <option value="tts">Text-to-Speech</option>
     </select>
   </div>
   <div class="node-row-soundUrl">
     <div class="form-row">
       <label for="node-input-soundUrl"><i class="fa fa-volume-up"></i> Sound URL</label>
       <input type="text" id="node-input-soundUrl" placeholder="Sound file URL">
+    </div>
+  </div>
+  <div class="node-row-tts">
+    <div class="form-row">
+      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
+      <input type="text" id="node-input-tts">
     </div>
   </div>
   <div class="form-row">
