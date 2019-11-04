@@ -6,9 +6,7 @@ module.exports = function(RED) {
 
   function SayNode(config) {
     RED.nodes.createNode(this, config);
-    this.text = config.text;
-    this.language = config.language;
-    this.voice = config.voice;
+    this.tts = RED.nodes.getNode(config.tts);
     this.output = config.output;
     this.outputs = config.outputs;
     this.redirectUrl = '/redirect-' + randomId();
@@ -51,10 +49,10 @@ module.exports = function(RED) {
       var response = new VoiceResponse();
       response.say(
         {
-          voice: node.voice,
-          language: node.language,
+          voice: node.tts.voice,
+          language: node.tts.language,
         },
-        node.text
+        node.tts.text
       );
       if (node.output == 'next') {
         msg.payload = {

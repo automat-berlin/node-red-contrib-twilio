@@ -1,171 +1,10 @@
 <script type="text/javascript">
-  var languages = {
-    'da-DK': {
-      code: 'da-DK',
-      name: 'Danish',
-      locale: 'Denmark',
-      voices: ['alice'],
-    },
-    'de-DE': {
-      code: 'de-DE',
-      name: 'German',
-      locale: 'Germany',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'en-AU': {
-      code: 'en-AU',
-      name: 'Australian English',
-      locale: 'Australia',
-      voices: ['alice'],
-    },
-    'en-CA': {
-      code: 'en-CA',
-      name: 'Canadian English',
-      locale: 'Canada',
-      voices: ['alice'],
-    },
-    'en-GB': {
-      code: 'en-GB',
-      name: 'British English',
-      locale: 'UK',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'en-IN': {
-      code: 'en-IN',
-      name: 'Indian English',
-      locale: 'India',
-      voices: ['alice'],
-    },
-    'en-US': {
-      code: 'en-US',
-      name: 'US English',
-      locale: 'United States',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'ca-ES': {
-      code: 'ca-ES',
-      name: 'Catalan Spanish',
-      locale: 'Spain',
-      voices: ['alice'],
-    },
-    'es-ES': {
-      code: 'es-ES',
-      name: 'Castilian Spanish',
-      locale: 'Spain',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'es-MX': {
-      code: 'es-MX',
-      name: 'Mexican Spanish',
-      locale: 'Mexico',
-      voices: ['alice'],
-    },
-    'fi-FI': {
-      code: 'fi-FI',
-      name: 'Finnish',
-      locale: 'Finland',
-      voices: ['alice'],
-    },
-    'fr-CA': {
-      code: 'fr-CA',
-      name: 'Canadian French',
-      locale: 'Canada',
-      voices: ['alice'],
-    },
-    'fr-FR': {
-      code: 'fr-FR',
-      name: 'French',
-      locale: 'France',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'it-IT': {
-      code: 'it-IT',
-      name: 'Italian',
-      locale: 'Italy',
-      voices: ['alice', 'man', 'woman'],
-    },
-    'ja-JP': {
-      code: 'ja-JP',
-      name: 'Japanese',
-      locale: 'Japan',
-      voices: ['alice'],
-    },
-    'ko-KR': {
-      code: 'ko-KR',
-      name: 'Korean',
-      locale: 'Korea',
-      voices: ['alice'],
-    },
-    'nb-NO': {
-      code: 'nb-NO',
-      name: 'Norwegian',
-      locale: 'Norway',
-      voices: ['alice'],
-    },
-    'nl-NL': {
-      code: 'nl-NL',
-      name: 'Dutch',
-      locale: 'Netherlands',
-      voices: ['alice'],
-    },
-    'pl-PL': {
-      code: 'pl-PL',
-      name: 'Polish',
-      locale: 'Poland',
-      voices: ['alice'],
-    },
-    'pt-BR': {
-      code: 'pt-BR',
-      name: 'Brazilian Portuguese',
-      locale: 'Brazil',
-      voices: ['alice'],
-    },
-    'pt-PT': {
-      code: 'pt-PT',
-      name: 'Portuguese',
-      locale: 'Portugal',
-      voices: ['alice'],
-    },
-    'ru-RU': {
-      code: 'ru-RU',
-      name: 'Russian',
-      locale: 'Russia',
-      voices: ['alice'],
-    },
-    'sv-SE': {
-      code: 'sv-SE',
-      name: 'Swedish',
-      locale: 'Sweden',
-      voices: ['alice'],
-    },
-    'zh-CN': {
-      code: 'zh-CN',
-      name: 'Chinese (Mandarin)',
-      locale: 'China',
-      voices: ['alice'],
-    },
-    'zh-HK': {
-      code: 'zh-HK',
-      name: 'Chinese (Cantonese)',
-      locale: 'Hong Kong',
-      voices: ['alice'],
-    },
-    'zh-TW': {
-      code: 'zh-TW',
-      name: 'Chinese (Taiwanese Mandarin)',
-      locale: 'Taiwan',
-      voices: ['alice'],
-    },
-  };
-
   RED.nodes.registerType('say', {
     category: 'twilio',
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
-      text: { value: '', required: true },
-      language: { value: 'en-US', required: true },
-      voice: { value: languages['en-US'].voices[0], required: true },
+      tts: { value: '', type: 'tts', required: true },
       output: { value: 'off' },
       outputs: { value: 0 },
     },
@@ -175,39 +14,6 @@
     label: function() {
       return this.name || 'say';
     },
-    oneditprepare: function() {
-      var node = this;
-      for (var languageCode in languages) {
-        $('#node-input-language').append(
-          $('<option>', {
-            value: languageCode,
-            text: '[' + languageCode + '] ' + languages[languageCode].name,
-          })
-        );
-      }
-      $('#node-input-language').val(node.language);
-
-      $('#node-input-language').change(function(e) {
-        var val = $(this).val();
-        $('#node-input-voice option').remove();
-        var language = languages[val];
-        if (language) {
-          language.voices.forEach(function(voice) {
-            $('#node-input-voice').append(
-              $('<option>', {
-                value: voice,
-                text: voice,
-              })
-            );
-          });
-        }
-        if (language.voices.includes(node.voice)) {
-          $('#node-input-voice').val(node.voice);
-        } else {
-          $('#node-input-voice').val(language.voices[0]);
-        }
-      });
-    },
     oneditsave: function() {
       $('#node-input-outputs').val($('#node-input-output').val() === 'off' ? 0 : 1);
     },
@@ -215,17 +21,11 @@
 </script>
 
 <script type="text/x-red" data-template-name="say">
-  <div class="form-row">
-    <label for="node-input-text"><i class="fa fa-align-left"></i> Text</label>
-    <textarea rows="10" style="width: 70%;" id="node-input-text"/>
-  </div>
-  <div class="form-row">
-    <label for="node-input-language"><i class="fa fa-language"></i> Language</label>
-    <select id="node-input-language"></select>
-  </div>
-  <div class="form-row">
-    <label for="node-input-voice"><i class="fa fa-microphone"></i> Voice</label>
-    <select id="node-input-voice"></select>
+  <div class="node-row-tts">
+    <div class="form-row">
+      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
+      <input type="text" id="node-input-tts">
+    </div>
   </div>
   <div class="form-row">
     <label for="node-input-output"><i class="fa fa-tag"></i> Output</label>

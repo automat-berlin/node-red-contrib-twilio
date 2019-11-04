@@ -1,6 +1,7 @@
 var should = require('should');
 var helper = require('node-red-node-test-helper');
 var shared = require('./shared.js');
+var ttsNode = require('../../nodes/config/tts.js');
 var sayNode = require('./../../nodes/say.js');
 var res = require('./mocks.js').res;
 var fs = require('fs');
@@ -20,9 +21,13 @@ describe('say node', function() {
   shared.shouldLoadCorrectly(sayNode, 'say');
 
   it('should respond with proper XML', function(done) {
-    var flow = [{ id: 'n1', type: 'say', text: 'Hello World', language: 'en-US', voice: 'alice', output: 'off' }];
+    var flow = [
+      { id: 'n1', type: 'say', tts: 'n2', output: 'off' },
+      { id: 'n2', type: 'tts', text: 'hello', voice: 'alice', language: 'en-US' },
+    ];
+    var testNodes = [ttsNode, sayNode];
     var xml = fs.readFileSync('test/resources/xml/say.xml', 'utf8');
-    helper.load(sayNode, flow, function() {
+    helper.load(testNodes, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
         should(msg.res._res.responseBody).be.eql(xml);
