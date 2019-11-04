@@ -7,6 +7,8 @@ module.exports = function(RED) {
   function SayNode(config) {
     RED.nodes.createNode(this, config);
     this.text = config.text;
+    this.language = config.language;
+    this.voice = config.voice;
     this.output = config.output;
     this.outputs = config.outputs;
     this.redirectUrl = '/redirect-' + randomId();
@@ -47,7 +49,13 @@ module.exports = function(RED) {
 
     node.on('input', function(msg) {
       var response = new VoiceResponse();
-      response.say(node.text);
+      response.say(
+        {
+          voice: node.voice,
+          language: node.language,
+        },
+        node.text
+      );
       if (node.output == 'next') {
         msg.payload = {
           twilio: response,

@@ -15,7 +15,8 @@
     "nodes": {
       "hangup": "nodes/hangup.js",
       "reject": "nodes/reject.js",
-      "play": "nodes/push/play.js",
+      "play": "nodes/play.js",
+      "say": "nodes/say.js",
       "webhook": "nodes/webhook.js"
     }
   },
