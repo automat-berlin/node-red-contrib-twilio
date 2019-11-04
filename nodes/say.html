@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  RED.nodes.registerType('say', {
+    category: 'twilio',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      text: { value: '', required: true },
+      output: { value: 'off' },
+      outputs: { value: 0 },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'say';
+    },
+    oneditsave: function() {
+      $('#node-input-outputs').val($('#node-input-output').val() === 'off' ? 0 : 1);
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="say">
+  <div class="form-row">
+    <label for="node-input-text"><i class="fa fa-align-left"></i> Text</label>
+    <textarea rows="10" style="width: 70%;" id="node-input-text"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-output"><i class="fa fa-tag"></i> Output</label>
+    <select id="node-input-output">
+        <option value="off">No output</option>
+        <option value="next">Next action</option>
+        <option value="redirect">Redirect callback</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <input type="hidden" id="node-input-outputs" />
+</script>
+
+<script type="text/x-red" data-help-name="say">
+  <p>Convert text to speech that is read back to the caller.</p>
+</script>
