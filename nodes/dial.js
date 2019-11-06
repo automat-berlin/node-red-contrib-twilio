@@ -8,7 +8,12 @@ module.exports = function(RED) {
     var node = this;
 
     node.on('input', function(msg) {
-      var response = new VoiceResponse();
+      var response;
+      if (msg.payload.twilio) {
+        response = msg.payload.twilio;
+      } else {
+        response = new VoiceResponse();
+      }
       var dial = response.dial();
       for (var number of node.numbers) {
         dial.number(number.number);

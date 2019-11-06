@@ -3,6 +3,8 @@ var helper = require('node-red-node-test-helper');
 var shared = require('./shared.js');
 var ttsNode = require('../../nodes/config/tts.js');
 var gatherNode = require('../../nodes/gather.js');
+var playNode = require('./../../nodes/play.js');
+var sayNode = require('./../../nodes/say.js');
 var res = require('./mocks.js').res;
 var fs = require('fs');
 
@@ -83,6 +85,41 @@ describe('gather node', function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
         should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
+        done();
+      });
+      n1.receive({ payload: '<call data>', res: res });
+    });
+  });
+
+  it('should respond with proper XML if connected to play node', function(done) {
+    var flow = [
+      { id: 'n1', type: 'play', url: 'http://example.com/example.wav', output: 'next', wires: [['n2']] },
+      { id: 'n2', type: 'gather' },
+    ];
+    var xml = fs.readFileSync('test/resources/xml/gather_connected_to_play.xml', 'utf8');
+    helper.load([playNode, gatherNode], flow, function() {
+      var n1 = helper.getNode('n1');
+      var n2 = helper.getNode('n2');
+      n2.on('input', function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n2.actionUrl));
+        done();
+      });
+      n1.receive({ payload: '<call data>', res: res });
+    });
+  });
+
+  it('should respond with proper XML if connected to say node', function(done) {
+    var flow = [
+      { id: 'n1', type: 'say', tts: 'n2', output: 'next', wires: [['n3']] },
+      { id: 'n2', type: 'tts', text: 'hello', voice: 'alice', language: 'en-US' },
+      { id: 'n3', type: 'gather' },
+    ];
+    var xml = fs.readFileSync('test/resources/xml/gather_connected_to_say.xml', 'utf8');
+    helper.load([ttsNode, sayNode, gatherNode], flow, function() {
+      var n1 = helper.getNode('n1');
+      var n3 = helper.getNode('n3');
+      n3.on('input', function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n3.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });

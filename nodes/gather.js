@@ -45,7 +45,12 @@ module.exports = function(RED) {
     });
 
     node.on('input', function(msg) {
-      var response = new VoiceResponse();
+      var response;
+      if (msg.payload.twilio) {
+        response = msg.payload.twilio;
+      } else {
+        response = new VoiceResponse();
+      }
       var gatherAttributes = {
         action: node.actionUrl,
         timeout: node.timeout,

@@ -2,6 +2,9 @@ var should = require('should');
 var helper = require('node-red-node-test-helper');
 var shared = require('./shared.js');
 var dialNode = require('../../nodes/dial.js');
+var playNode = require('./../../nodes/play.js');
+var ttsNode = require('../../nodes/config/tts.js');
+var sayNode = require('./../../nodes/say.js');
 var res = require('./mocks.js').res;
 var fs = require('fs');
 
@@ -38,6 +41,41 @@ describe('dial node', function() {
     helper.load(dialNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml);
+        done();
+      });
+      n1.receive({ payload: '<call data>', res: res });
+    });
+  });
+
+  it('should respond with proper XML if connected to play node', function(done) {
+    var flow = [
+      { id: 'n1', type: 'play', url: 'http://example.com/example.wav', output: 'next', wires: [['n2']] },
+      { id: 'n2', type: 'dial', numbers: [{ number: '4915799912345' }] },
+    ];
+    var xml = fs.readFileSync('test/resources/xml/dial_connected_to_play.xml', 'utf8');
+    helper.load([playNode, dialNode], flow, function() {
+      var n1 = helper.getNode('n1');
+      var n2 = helper.getNode('n2');
+      n2.on('input', function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml);
+        done();
+      });
+      n1.receive({ payload: '<call data>', res: res });
+    });
+  });
+
+  it('should respond with proper XML if connected to say node', function(done) {
+    var flow = [
+      { id: 'n1', type: 'say', tts: 'n2', output: 'next', wires: [['n3']] },
+      { id: 'n2', type: 'tts', text: 'hello', voice: 'alice', language: 'en-US' },
+      { id: 'n3', type: 'dial', numbers: [{ number: '4915799912345' }] },
+    ];
+    var xml = fs.readFileSync('test/resources/xml/dial_connected_to_say.xml', 'utf8');
+    helper.load([ttsNode, sayNode, dialNode], flow, function() {
+      var n1 = helper.getNode('n1');
+      var n3 = helper.getNode('n3');
+      n3.on('input', function(msg) {
         should(msg.res._res.responseBody).be.eql(xml);
         done();
       });
