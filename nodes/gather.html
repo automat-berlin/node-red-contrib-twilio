@@ -4,6 +4,8 @@
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
+      numDigits: { value: '' },
+      timeout: { value: '5' },
       sound: { value: 'none' },
       soundUrl: { value: '' },
       tts: { value: '', type: 'tts', required: false },
@@ -25,6 +27,14 @@
 </script>
 
 <script type="text/x-red" data-template-name="gather">
+  <div class="form-row">
+    <label for="node-input-numDigits"><i class="fa fa-gear"></i> numDigits</label>
+    <input type="text" id="node-input-numDigits" placeholder="numDigits (default: unlimited)">
+  </div>
+  <div class="form-row">
+    <label for="node-input-timeout"><i class="fa fa-clock-o"></i> Timeout</label>
+    <input type="text" id="node-input-timeout" placeholder="Timeout (default: 5s)">
+  </div>
   <div class="form-row">
     <label for="node-input-sound"><i class="fa fa-play-circle"></i> Sound</label>
     <select id="node-input-sound">
