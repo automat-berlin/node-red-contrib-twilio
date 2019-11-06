@@ -1,5 +1,6 @@
 module.exports = function(RED) {
   'use strict';
+  var bodyParser = require('body-parser');
   var VoiceResponse = require('twilio').twiml.VoiceResponse;
 
   function GatherNode(config) {
@@ -9,11 +10,46 @@ module.exports = function(RED) {
     this.sound = config.sound;
     this.soundUrl = config.soundUrl;
     this.tts = RED.nodes.getNode(config.tts);
+    this.actionUrl = '/action-' + randomId();
+    this.method = 'post';
     var node = this;
+
+    function randomId() {
+      return Math.floor(Math.random() * 1000000);
+    }
+
+    this.errorHandler = function(err, req, res) {
+      node.warn(err);
+      res.sendStatus(500);
+    };
+
+    this.callback = function(req, res) {
+      var msgid = RED.util.generateId();
+      res._msgid = msgid;
+      var msg = { _msgid: msgid, req: req, res: { _res: res }, payload: req.body };
+      node.send(msg);
+    };
+
+    var maxApiRequestSize = RED.settings.apiMaxLength || '5mb';
+    var urlencParser = bodyParser.urlencoded({ limit: maxApiRequestSize, extended: true });
+
+    RED.httpNode.post(this.actionUrl, urlencParser, this.callback, this.errorHandler);
+
+    this.on('close', function() {
+      var node = this;
+      RED.httpNode._router.stack.forEach(function(route, i, routes) {
+        if (route.route && route.route.path === node.actionUrl && route.route.methods[node.method]) {
+          routes.splice(i, 1);
+        }
+      });
+    });
 
     node.on('input', function(msg) {
       var response = new VoiceResponse();
-      var gatherAttributes = { timeout: node.timeout };
+      var gatherAttributes = {
+        action: node.actionUrl,
+        timeout: node.timeout,
+      };
       if (node.numDigits) {
         gatherAttributes.numDigits = node.numDigits;
       }

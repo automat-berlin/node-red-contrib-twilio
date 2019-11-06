@@ -26,7 +26,7 @@ describe('gather node', function() {
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -39,7 +39,7 @@ describe('gather node', function() {
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -52,7 +52,7 @@ describe('gather node', function() {
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -65,7 +65,7 @@ describe('gather node', function() {
     helper.load(gatherNode, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
@@ -82,10 +82,14 @@ describe('gather node', function() {
     helper.load(testNodes, flow, function() {
       var n1 = helper.getNode('n1');
       n1.on('input', function(msg) {
-        should(msg.res._res.responseBody).be.eql(xml);
+        should(msg.res._res.responseBody).be.eql(xml.replace('${actionUrl}', n1.actionUrl));
         done();
       });
       n1.receive({ payload: '<call data>', res: res });
     });
   });
+
+  it('should create action callback');
+  it('should remove action callback on close');
+  it('should send received action callback payload to the next node');
 });
