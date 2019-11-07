@@ -13,6 +13,8 @@
           return !!v.length;
         },
       },
+      statusCallback: { value: '' },
+      outputs: { value: 0 },
     },
     inputs: 1,
     outputs: 0,
@@ -95,6 +97,8 @@
         var r = { number: value };
         node.numbers.push(r);
       });
+
+      $('#node-input-outputs').val($('#node-input-statusCallback').prop('checked') ? 1 : 0);
     },
     oneditresize: function(size) {
       var rows = $('#dialog-form>div:not(.node-input-numbers-container-row)');
@@ -114,6 +118,15 @@
     min-height: 200px;
     min-width: 430px;
   }
+  #node-input-statusCallback-label {
+    width: auto;
+    margin-right: 10px;
+  }
+  #node-input-statusCallback {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+  }
 </style>
 
 <script type="text/x-red" data-template-name="dial">
@@ -124,6 +137,10 @@
         <ol id="node-input-numbers-container"></ol>
       </div>
     </div>
+  </div>
+  <div class="form-row">
+    <label for="node-input-statusCallback" id="node-input-statusCallback-label"><i class="fa fa-feed"></i> Status callback</label>
+    <input type="checkbox" id="node-input-statusCallback">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
