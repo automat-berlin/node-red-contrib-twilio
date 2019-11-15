@@ -15,6 +15,7 @@
     "nodes": {
       "dial": "nodes/dial.js",
       "gather": "nodes/gather.js",
+      "hangup-call": "nodes/hangup-call.js",
       "hangup": "nodes/hangup.js",
       "play": "nodes/play.js",
       "reject": "nodes/reject.js",
