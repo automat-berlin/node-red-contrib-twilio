@@ -4,6 +4,8 @@
     color: '#a6bbcf',
     defaults: {
       text: { value: '', required: true },
+      next: { value: '' },
+      outputs: { value: 0 },
       name: { value: '' },
     },
     inputs: 1,
@@ -12,8 +14,19 @@
     label: function() {
       return this.name || 'message';
     },
+    oneditsave: function() {
+      $('#node-input-outputs').val($('#node-input-next').prop('checked') ? 1 : 0);
+    },
   });
 </script>
+
+<style>
+  #node-input-next {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+  }
+</style>
 
 <script type="text/x-red" data-template-name="message">
   <div class="form-row">
@@ -21,11 +34,16 @@
     <textarea rows="10" style="width: 70%;" id="node-input-text"/>
   </div>
   <div class="form-row">
+    <label for="node-input-next"><i class="fa fa-tag"></i> Next</label>
+    <input type="checkbox" id="node-input-next">
+  </div>
+  <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
+  <input type="hidden" id="node-input-outputs" />
 </script>
 
 <script type="text/x-red" data-help-name="message">
-  <p>Hang up calls.</p>
+  <p>Send a message to a phone number or a Wireless SIM.</p>
 </script>
