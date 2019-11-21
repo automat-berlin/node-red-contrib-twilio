@@ -19,7 +19,17 @@ module.exports = {
   userDir: __dirname,
 
   // defines order of the categories in the editor palette
-  paletteCategories: ['subflows', 'twilio', 'twilio voice', 'input', 'output', 'function', 'storage', 'advanced'],
+  paletteCategories: [
+    'subflows',
+    'twilio',
+    'twilio voice',
+    'twilio sms',
+    'input',
+    'output',
+    'function',
+    'storage',
+    'advanced',
+  ],
 
   // sets global context data
   functionGlobalContext: {
