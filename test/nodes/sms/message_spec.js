@@ -48,4 +48,17 @@ describe('message node', function() {
       n1.receive({ payload: '<message data>', res: res });
     });
   });
+
+  it('should respond with proper XML when from and to attributes are set', function(done) {
+    var flow = [{ id: 'n1', type: 'message', text: 'Hello World!', from: 'automat.berlin', to: '491234567890' }];
+    var xml = fs.readFileSync('test/resources/xml/message_with_from_and_to.xml', 'utf8');
+    helper.load(messageNode, flow, function() {
+      var n1 = helper.getNode('n1');
+      n1.on('input', function(msg) {
+        should(msg.res._res.responseBody).be.eql(xml);
+        done();
+      });
+      n1.receive({ payload: '<message data>', res: res });
+    });
+  });
 });

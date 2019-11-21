@@ -5,6 +5,8 @@ module.exports = function(RED) {
   function MessageNode(config) {
     RED.nodes.createNode(this, config);
     this.text = config.text;
+    this.from = config.from;
+    this.to = config.to;
     this.next = config.next;
     this.outputs = config.outputs;
     var node = this;
@@ -16,7 +18,14 @@ module.exports = function(RED) {
       } else {
         response = new MessagingResponse();
       }
-      var message = response.message();
+      var messageAttributes = {};
+      if (node.from) {
+        messageAttributes.from = node.from;
+      }
+      if (node.to) {
+        messageAttributes.to = node.to;
+      }
+      var message = response.message(messageAttributes);
       message.body(node.text);
       if (node.next) {
         msg.payload = {
