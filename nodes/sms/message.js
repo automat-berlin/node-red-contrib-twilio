@@ -5,15 +5,29 @@ module.exports = function(RED) {
   function MessageNode(config) {
     RED.nodes.createNode(this, config);
     this.text = config.text;
+    this.next = config.next;
+    this.outputs = config.outputs;
     var node = this;
 
     node.on('input', function(msg) {
-      var response = new MessagingResponse();
+      var response;
+      if (msg.payload.twilio) {
+        response = msg.payload.twilio;
+      } else {
+        response = new MessagingResponse();
+      }
       var message = response.message();
       message.body(node.text);
-      msg.payload = response.toString();
-      msg.res._res.set('Content-Type', 'application/xml');
-      msg.res._res.status(200).send(msg.payload);
+      if (node.next) {
+        msg.payload = {
+          twilio: response,
+        };
+        node.send(msg);
+      } else {
+        msg.payload = response.toString();
+        msg.res._res.set('Content-Type', 'application/xml');
+        msg.res._res.status(200).send(msg.payload);
+      }
     });
   }
   RED.nodes.registerType('message', MessageNode);
