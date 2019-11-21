@@ -4,6 +4,8 @@
     color: '#a6bbcf',
     defaults: {
       text: { value: '', required: true },
+      from: { value: '' },
+      to: { value: '', validate: RED.validators.regex(/^[0-9]*$/) },
       next: { value: '' },
       outputs: { value: 0 },
       name: { value: '' },
@@ -32,6 +34,14 @@
   <div class="form-row">
     <label for="node-input-text"><i class="fa fa-align-left"></i> Text</label>
     <textarea rows="10" style="width: 70%;" id="node-input-text"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-from"><i class="fa fa-tag"></i> From</label>
+    <input type="text" id="node-input-from" placeholder="From">
+  </div>
+  <div class="form-row">
+    <label for="node-input-to"><i class="fa fa-tag"></i> To</label>
+    <input type="text" id="node-input-to" placeholder="To">
   </div>
   <div class="form-row">
     <label for="node-input-next"><i class="fa fa-tag"></i> Next</label>
