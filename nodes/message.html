@@ -1,0 +1,31 @@
+<script type="text/javascript">
+  RED.nodes.registerType('message', {
+    category: 'twilio',
+    color: '#a6bbcf',
+    defaults: {
+      text: { value: '', required: true },
+      name: { value: '' },
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'message';
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="message">
+  <div class="form-row">
+    <label for="node-input-text"><i class="fa fa-align-left"></i> Text</label>
+    <textarea rows="10" style="width: 70%;" id="node-input-text"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="message">
+  <p>Hang up calls.</p>
+</script>

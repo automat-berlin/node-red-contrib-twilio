@@ -17,6 +17,7 @@
       "gather": "nodes/gather.js",
       "hangup-call": "nodes/hangup-call.js",
       "hangup": "nodes/hangup.js",
+      "message": "nodes/message.js",
       "play": "nodes/play.js",
       "reject": "nodes/reject.js",
       "say": "nodes/say.js",
