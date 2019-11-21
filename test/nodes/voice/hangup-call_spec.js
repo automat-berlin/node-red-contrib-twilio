@@ -1,7 +1,7 @@
 var helper = require('node-red-node-test-helper');
-var shared = require('./shared.js');
-var hangupCallNode = require('../../nodes/hangup-call.js');
-var accountNode = require('../../nodes/config/account.js');
+var shared = require('../shared.js');
+var hangupCallNode = require('../../../nodes/voice/hangup-call.js');
+var accountNode = require('../../../nodes/config/account.js');
 var nock = require('nock');
 
 helper.init(require.resolve('node-red'));

@@ -13,14 +13,14 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
-      "dial": "nodes/dial.js",
-      "gather": "nodes/gather.js",
-      "hangup-call": "nodes/hangup-call.js",
-      "hangup": "nodes/hangup.js",
+      "dial": "nodes/voice/dial.js",
+      "gather": "nodes/voice/gather.js",
+      "hangup-call": "nodes/voice/hangup-call.js",
+      "hangup": "nodes/voice/hangup.js",
       "message": "nodes/message.js",
-      "play": "nodes/play.js",
-      "reject": "nodes/reject.js",
-      "say": "nodes/say.js",
+      "play": "nodes/voice/play.js",
+      "reject": "nodes/voice/reject.js",
+      "say": "nodes/voice/say.js",
       "webhook": "nodes/webhook.js"
     }
   },

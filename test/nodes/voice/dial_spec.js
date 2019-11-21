@@ -1,11 +1,11 @@
 var should = require('should');
 var helper = require('node-red-node-test-helper');
-var shared = require('./shared.js');
-var dialNode = require('../../nodes/dial.js');
-var playNode = require('./../../nodes/play.js');
-var ttsNode = require('../../nodes/config/tts.js');
-var sayNode = require('./../../nodes/say.js');
-var res = require('./mocks.js').res;
+var shared = require('../shared.js');
+var dialNode = require('../../../nodes/voice/dial.js');
+var playNode = require('../../../nodes/voice/play.js');
+var ttsNode = require('../../../nodes/config/tts.js');
+var sayNode = require('../../../nodes/voice/say.js');
+var res = require('../mocks.js').res;
 var fs = require('fs');
 
 helper.init(require.resolve('node-red'));
