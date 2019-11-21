@@ -1,10 +1,10 @@
 <script type="text/javascript">
-  RED.nodes.registerType('say', {
-    category: 'twilio',
+  RED.nodes.registerType('play', {
+    category: 'twilio voice',
     color: '#a6bbcf',
     defaults: {
       name: { value: '' },
-      tts: { value: '', type: 'tts', required: true },
+      url: { value: '', required: true },
       output: { value: 'off' },
       outputs: { value: 0 },
     },
@@ -12,7 +12,7 @@
     outputs: 0,
     icon: 'file.png',
     label: function() {
-      return this.name || 'say';
+      return this.name || 'play';
     },
     oneditsave: function() {
       $('#node-input-outputs').val($('#node-input-output').val() === 'off' ? 0 : 1);
@@ -20,12 +20,10 @@
   });
 </script>
 
-<script type="text/x-red" data-template-name="say">
-  <div class="node-row-tts">
-    <div class="form-row">
-      <label for="node-input-tts"><i class="fa fa-microphone"></i> TTS</label>
-      <input type="text" id="node-input-tts">
-    </div>
+<script type="text/x-red" data-template-name="play">
+  <div class="form-row">
+    <label for="node-input-url"><i class="fa fa-globe"></i> Sound URL</label>
+    <input type="text" id="node-input-url" placeholder="Sound file URL">
   </div>
   <div class="form-row">
     <label for="node-input-output"><i class="fa fa-tag"></i> Output</label>
@@ -42,6 +40,7 @@
   <input type="hidden" id="node-input-outputs" />
 </script>
 
-<script type="text/x-red" data-help-name="say">
-  <p>Convert text to speech that is read back to the caller.</p>
+<script type="text/x-red" data-help-name="play">
+  <p>Play a given sound file.</p>
+  <p>Afterwards the call is hung up.</p>
 </script>

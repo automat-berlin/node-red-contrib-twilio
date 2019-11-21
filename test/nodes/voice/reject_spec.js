@@ -1,8 +1,8 @@
 var should = require('should');
 var helper = require('node-red-node-test-helper');
-var shared = require('./shared.js');
-var rejectNode = require('./../../nodes/reject.js');
-var res = require('./mocks.js').res;
+var shared = require('../shared.js');
+var rejectNode = require('../../../nodes/voice/reject.js');
+var res = require('../mocks.js').res;
 var fs = require('fs');
 
 helper.init(require.resolve('node-red'));
