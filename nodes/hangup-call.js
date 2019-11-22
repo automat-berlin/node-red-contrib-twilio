@@ -10,6 +10,7 @@ module.exports = function(RED) {
       return;
     }
     var client = require('twilio')(node.account.credentials.sid, node.account.credentials.token);
+    client.api.baseUrl = node.account.credentials.endpoint;
 
     node.on('input', function(msg) {
       client.calls(msg.payload.CallSid).update({ status: 'completed' });

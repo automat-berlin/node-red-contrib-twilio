@@ -6,6 +6,7 @@ module.exports = function(RED) {
     credentials: {
       sid: { type: 'text' },
       token: { type: 'password' },
+      endpoint: { type: 'text' },
     },
   });
 };
