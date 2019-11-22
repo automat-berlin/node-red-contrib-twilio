@@ -16,8 +16,8 @@
       "dial": "nodes/dial.js",
       "gather": "nodes/gather.js",
       "hangup": "nodes/hangup.js",
-      "reject": "nodes/reject.js",
       "play": "nodes/play.js",
+      "reject": "nodes/reject.js",
       "say": "nodes/say.js",
       "webhook": "nodes/webhook.js"
     }
