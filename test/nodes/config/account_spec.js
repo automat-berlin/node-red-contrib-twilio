@@ -16,4 +16,15 @@ describe('account config node', function() {
   });
 
   shared.shouldLoadCorrectly(accountNode, 'account');
+
+  it('should allow to read credentials', function(done) {
+    var flow = [{ id: 'n1', type: 'account', name: 'test' }];
+    var credentials = { credentials: { sid: 'ACloginexamplecom', token: 'test1234' } };
+
+    helper.load(accountNode, flow, credentials, function() {
+      var n1 = helper.getNode('n1');
+      console.log(helper._redNodes.getFlows().flows[0].getNodeCredentials);
+      done();
+    });
+  });
 });
