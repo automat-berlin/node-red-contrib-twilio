@@ -13,6 +13,7 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
+      "dial": "nodes/dial.js",
       "gather": "nodes/gather.js",
       "hangup": "nodes/hangup.js",
       "reject": "nodes/reject.js",
