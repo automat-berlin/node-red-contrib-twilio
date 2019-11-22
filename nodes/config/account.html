@@ -7,6 +7,7 @@
     credentials: {
       sid: { type: 'text' },
       token: { type: 'password' },
+      endpoint: { type: 'text' },
     },
     label: function() {
       return this.name || '<unnamed account>';
@@ -26,6 +27,10 @@
   <div class="form-row">
     <label for="node-config-input-token"><i class="fa fa-key"></i> Auth token</label>
     <input type="password" id="node-config-input-token" placeholder="Auth token">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-endpoint"><i class="fa fa-user"></i> API endpoint</label>
+    <input type="text" id="node-config-input-endpoint" placeholder="https://api.twilio.com">
   </div>
 </script>
 
