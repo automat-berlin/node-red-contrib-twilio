@@ -61,4 +61,8 @@ describe('message node', function() {
       n1.receive({ payload: '<message data>', res: res });
     });
   });
+
+  it('should create status callback');
+  it('should remove status callback on close');
+  it('should send received status callback payload to the next node');
 });
