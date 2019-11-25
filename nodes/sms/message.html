@@ -7,22 +7,49 @@
       from: { value: '' },
       to: { value: '', validate: RED.validators.regex(/^[0-9]*$/) },
       next: { value: '' },
+      statusCallback: { value: '' },
       outputs: { value: 0 },
       name: { value: '' },
     },
     inputs: 1,
     outputs: 0,
+    outputLabels: function(index) {
+      return index == this.outputs - 1 && this.next ? 'next' : 'status';
+    },
     icon: 'file.png',
     label: function() {
       return this.name || 'message';
     },
+    oneditprepare: function() {
+      var id = 0;
+      ['#node-input-statusCallback', '#node-input-next'].forEach(function(selector, i) {
+        var output = $(selector);
+        var sourcePort = output.prop('checked') ? id++ : i + 10;
+        output.data('sourcePort', sourcePort);
+      });
+    },
     oneditsave: function() {
-      $('#node-input-outputs').val($('#node-input-next').prop('checked') ? 1 : 0);
+      var outputMap = {};
+      var id = 0;
+      ['#node-input-statusCallback', '#node-input-next'].forEach(function(selector) {
+        var output = $(selector);
+        var sourcePort = output.data('sourcePort');
+        var port = output.prop('checked') ? id++ : -1;
+        if (sourcePort < 10 || port != -1) {
+          outputMap[sourcePort] = port;
+        }
+      });
+      $('#node-input-outputs').val(JSON.stringify(outputMap));
     },
   });
 </script>
 
 <style>
+  #node-input-statusCallback-label {
+    width: auto;
+    margin-right: 10px;
+  }
+  #node-input-statusCallback,
   #node-input-next {
     display: inline-block;
     width: auto;
@@ -46,6 +73,10 @@
   <div class="form-row">
     <label for="node-input-next"><i class="fa fa-tag"></i> Next</label>
     <input type="checkbox" id="node-input-next">
+  </div>
+  <div class="form-row">
+    <label for="node-input-statusCallback" id="node-input-statusCallback-label"><i class="fa fa-feed"></i> Status callback</label>
+    <input type="checkbox" id="node-input-statusCallback">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
