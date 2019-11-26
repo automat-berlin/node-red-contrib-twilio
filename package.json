@@ -19,6 +19,7 @@
       "hangup": "nodes/voice/hangup.js",
       "message": "nodes/sms/message.js",
       "play": "nodes/voice/play.js",
+      "redirect": "nodes/sms/redirect.js",
       "reject": "nodes/voice/reject.js",
       "say": "nodes/voice/say.js",
       "webhook": "nodes/webhook.js"
