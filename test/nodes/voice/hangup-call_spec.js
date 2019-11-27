@@ -27,14 +27,14 @@ describe('hangup-call node', function() {
 
   shared.shouldLoadCorrectly(hangupCallNode, 'hangup-call');
 
-  it('should make a proper request to defined endpoint', function(done) {
+  it('should make a proper request to defined API URL', function(done) {
     var flow = [{ id: 'n1', type: 'hangup-call', account: 'n2' }, { id: 'n2', type: 'account', name: 'test' }];
     var testNodes = [hangupCallNode, accountNode];
     var credentials = {
       n2: {
         sid: 'ACdcb897af9ca9de8e8bd213bdcafd837d',
         token: 'bdadafd6673cb8374bcdedbd83620384bd',
-        endpoint: 'https://api.twilio.connectors.automat.berlin',
+        apiUrl: 'https://api.twilio.connectors.automat.berlin',
       },
     };
     var scope = nock('https://api.twilio.connectors.automat.berlin')
