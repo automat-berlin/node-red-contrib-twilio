@@ -1,0 +1,42 @@
+<script type="text/javascript">
+  RED.nodes.registerType('weather-provider', {
+    category: 'config',
+    defaults: {
+      provider: { value: 'openweathermap', required: true },
+      name: { value: '', required: true },
+    },
+    credentials: {
+      apiKey: { type: 'password' },
+    },
+    label: function() {
+      return this.name || '<unnamed weather provider>';
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="weather-provider">
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-config-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-provider"><i class="fa fa-sun-o"></i> Provider</label>
+    <select id="node-config-input-provider">
+        <option value="openweathermap">OpenWeatherMap API</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <label for="node-config-input-apiKey"><i class="fa fa-key"></i> API key</label>
+    <input type="password" id="node-config-input-apiKey" placeholder="API key">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="weather-provider">
+  <p>Manage weather provider configuration.</p>
+
+  <h3>Details</h3>
+  <p><code>API key</code> is required to authorize HTTP requests sent to the weather provider API. For security reasons
+     they are omitted when flows are exported from the editor.</p>
+  <p><code>Name</code> property is shown on selection lists to easily switch between different account
+     configurations.</p>
+</script>

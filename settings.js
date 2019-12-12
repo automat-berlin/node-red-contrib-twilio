@@ -24,6 +24,7 @@ module.exports = {
     'twilio',
     'twilio voice',
     'twilio sms',
+    'weather',
     'input',
     'output',
     'function',

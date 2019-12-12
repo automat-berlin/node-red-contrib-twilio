@@ -13,6 +13,7 @@
   "license": "MIT",
   "node-red": {
     "nodes": {
+      "current-weather": "nodes/weather/current-weather.js",
       "dial": "nodes/voice/dial.js",
       "gather": "nodes/voice/gather.js",
       "hangup-call": "nodes/voice/hangup-call.js",
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "request": "^2.88.0",
     "twilio": "^3.36.0"
   },
   "devDependencies": {

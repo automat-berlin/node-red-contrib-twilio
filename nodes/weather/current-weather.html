@@ -1,0 +1,54 @@
+<script type="text/javascript">
+  RED.nodes.registerType('current-weather', {
+    category: 'weather',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      weatherProvider: { value: '', type: 'weather-provider' },
+      property: { value: 'payload.postalCode', required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'current-weather';
+    },
+    oneditprepare: function() {
+      if (this.property === undefined) {
+        $('#node-input-property').val('payload.postalCode');
+      }
+      $('#node-input-property').typedInput({ default: 'msg', types: ['msg'] });
+    },
+  });
+</script>
+
+<style>
+  .wide-label {
+    width: 130px !important;
+  }
+</style>
+
+<script type="text/x-red" data-template-name="current-weather">
+  <div class="form-row">
+    <label for="node-input-weatherProvider" class="wide-label"><i class="fa fa-sun-o"></i> Weather provider</label>
+    <input type="text" id="node-input-weatherProvider">
+  </div>
+  <div class="form-row">
+    <label for="node-input-property" class="wide-label"><i class="fa fa-ellipsis-h"></i> Property</label>
+    <input type="text" id="node-input-property" placeholder="payload.postalCode" style="width:calc(70% - 1px)">
+  </div>
+  <div class="form-row">
+    <label for="node-input-name" class="wide-label"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="current-weather">
+  <p>Get current weather data in the city in Germany based on the provided postal code.</p>
+
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+      <dt>postalCode<span class="property-type">string</span></dt>
+      <dd>This property is expected in a message payload by default and it should contain five digits (e.g. 12524).</dd>
+  </dl>
+</script>
