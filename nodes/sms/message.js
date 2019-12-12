@@ -2,6 +2,7 @@ module.exports = function(RED) {
   'use strict';
   var bodyParser = require('body-parser');
   var MessagingResponse = require('twilio').twiml.MessagingResponse;
+  var renderTemplate = require('../../utils/renderTemplate.js');
 
   function MessageNode(config) {
     RED.nodes.createNode(this, config);
@@ -34,7 +35,8 @@ module.exports = function(RED) {
         messageAttributes.method = node.method;
       }
       var message = response.message(messageAttributes);
-      message.body(node.text);
+      var text = renderTemplate(msg, node.text);
+      message.body(text);
       if (node.next) {
         msg.payload = {
           twilio: response,

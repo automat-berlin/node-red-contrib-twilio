@@ -2,6 +2,7 @@ module.exports = function(RED) {
   'use strict';
   var bodyParser = require('body-parser');
   var VoiceResponse = require('twilio').twiml.VoiceResponse;
+  var renderTemplate = require('../../utils/renderTemplate.js');
 
   function GatherNode(config) {
     RED.nodes.createNode(this, config);
@@ -67,7 +68,7 @@ module.exports = function(RED) {
             voice: node.tts.voice,
             language: node.tts.language,
           },
-          node.tts.text
+          renderTemplate(msg, node.tts.text)
         );
       }
       msg.payload = response.toString();

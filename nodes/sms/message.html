@@ -87,4 +87,19 @@
 
 <script type="text/x-red" data-help-name="message">
   <p>Send a message to a phone number or a Wireless SIM.</p>
+
+  <h3>Details</h3>
+  <p><code>Text</code> can be provided as a template which will be populated with values from the incoming msg object.</p>
+  <p>For example, a text template:
+  <pre>Hello {{payload.name}}. Today is {{date}}</pre>
+  <p>for an incoming msg:
+  <pre>
+  {
+    date: "Monday",
+    payload: {
+      name: "Fred"
+    }
+  }</pre>
+  <p>will be evaluted to:
+  <pre>Hello Fred. Today is Monday</pre>
 </script>

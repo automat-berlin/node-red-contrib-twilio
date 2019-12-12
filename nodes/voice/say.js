@@ -3,6 +3,7 @@ module.exports = function(RED) {
   var url = require('url');
   var bodyParser = require('body-parser');
   var VoiceResponse = require('twilio').twiml.VoiceResponse;
+  var renderTemplate = require('../../utils/renderTemplate.js');
 
   function SayNode(config) {
     RED.nodes.createNode(this, config);
@@ -52,7 +53,7 @@ module.exports = function(RED) {
           voice: node.tts.voice,
           language: node.tts.language,
         },
-        node.tts.text
+        renderTemplate(msg, node.tts.text)
       );
       if (node.output == 'next') {
         msg.payload = {

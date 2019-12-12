@@ -230,4 +230,17 @@
   <h3>Details</h3>
   <p><code>Name</code> property is shown on selection lists to easily switch between different text-to-speech
      configurations.</p>
+  <p><code>Text</code> can be provided as a template which will be populated with values from the incoming msg object.</p>
+  <p>For example, a text template:
+  <pre>Hello {{payload.name}}. Today is {{date}}</pre>
+  <p>for an incoming msg:
+  <pre>
+  {
+    date: "Monday",
+    payload: {
+      name: "Fred"
+    }
+  }</pre>
+  <p>will be evaluted to:
+  <pre>Hello Fred. Today is Monday</pre>
 </script>
