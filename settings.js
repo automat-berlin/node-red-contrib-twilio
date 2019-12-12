@@ -13,7 +13,7 @@ module.exports = {
   uiPort: uiPort,
 
   // The file containing the flows. If not set, it defaults to flows_<hostname>.json
-  flowFile: 'examples/Weather flow.json',
+  flowFile: 'examples/All flows.json',
 
   // Node-RED scans the `nodes` directory in the userDir to find local node files
   userDir: __dirname,
