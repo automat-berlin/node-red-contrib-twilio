@@ -20,9 +20,7 @@ selenium-debug.log
 
 # Node-RED config files
 .config.json
-.config.json.backup
-.flows_none.json.backup
 flows_none.json
-flows_none_cred.json
-Sample flow_cred.json
+*_cred.json
+*.backup
 examples/.*.backup
