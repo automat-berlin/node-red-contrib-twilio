@@ -38,6 +38,7 @@
     "mocha": "^6.2.2",
     "nock": "^11.7.0",
     "node-red": "^1.0.2",
+    "node-red-contrib-mongodb3": "^2.0.1",
     "node-red-node-mysql": "0.0.19",
     "node-red-node-test-helper": "^0.2.3",
     "prettier": "^1.18.2",
