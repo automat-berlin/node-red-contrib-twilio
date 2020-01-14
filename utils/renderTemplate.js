@@ -1,3 +1,28 @@
+/**
+ * renderTemplate module.
+ * @module utils/renderTemplate
+ */
+
+/**
+ * Populate the template with values from the msg object.
+ *
+ * @param {Object} msg - The object with values which should be used in the template.
+ * @param {string} template - The template string which will be populated with values from the msg object.
+ *
+ * @example
+ * var msg = {
+ *   date: "Monday",
+ *   payload: {
+ *     name: "Fred"
+ *   }
+ * }
+ * var template = "Hello {{payload.name}}. Today is {{date}}"
+ *
+ * renderTemplate(msg, template) // returns: Hello Fred. Today is Monday
+ *
+ * @returns {string} The rendered template as a string.
+ */
+
 module.exports = function(msg, template) {
   var renderedTemplate = template;
   var tokens = template.match(/{{[^{]+}}/g) || [];
