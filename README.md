@@ -12,7 +12,7 @@ _Automat Berlin GmbH as well as the authors of this module are not affiliated wi
 
 You can get hands-on experience with Node-RED and Twilio nodes by deploying them to [Heroku](https://www.heroku.com). You only need a free account (no credit card required).
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/automat-berlin/node-red-contrib-twilio)
 
 Note: The 'Deploy to Heroku' button will not work properly if your browser is removing the Referer HTTP header from the request.
 
