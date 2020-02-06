@@ -7,7 +7,9 @@ module.exports = function(RED) {
     RED.nodes.createNode(this, config);
     this.account = RED.nodes.getNode(config.account);
     this.from = config.from;
+    this.fromType = config.fromType;
     this.to = config.to;
+    this.toType = config.toType;
     this.webhookUrl = '/webhook-' + randomId();
     this.method = 'post';
     var node = this;
@@ -52,15 +54,26 @@ module.exports = function(RED) {
 
     node.on('input', function(msg) {
       var absoluteWebhookUrl = url.resolve(this.context().global.get('baseUrl'), node.webhookUrl);
+      var fromNumber;
+      var toNumber;
+      if (node.fromType === 'msg') {
+        fromNumber = RED.util.getMessageProperty(msg, node.from);
+      } else {
+        fromNumber = node.from;
+      }
+      if (node.toType === 'msg') {
+        toNumber = RED.util.getMessageProperty(msg, node.to);
+      } else {
+        toNumber = node.to;
+      }
       client.calls
         .create({
           url: absoluteWebhookUrl,
-          to: msg.payload.to || node.to,
-          from: msg.payload.from || node.from,
+          to: toNumber,
+          from: fromNumber,
         })
         .then(call => {
-          msg.payload = call;
-          node.send(msg);
+          node.log(call);
         });
     });
   }
