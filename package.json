@@ -23,6 +23,7 @@
       "redirect": "nodes/sms/redirect.js",
       "reject": "nodes/voice/reject.js",
       "say": "nodes/voice/say.js",
+      "send-sms": "nodes/sms/send-sms.js",
       "start-call": "nodes/voice/start-call.js",
       "webhook": "nodes/webhook.js"
     }
