@@ -6,7 +6,6 @@ module.exports = function(RED) {
     this.text = config.text;
     this.language = config.language;
     this.voice = config.voice;
-    var node = this;
   }
   RED.nodes.registerType('tts', TTSNode);
 };

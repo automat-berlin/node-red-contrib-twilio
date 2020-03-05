@@ -1,4 +1,3 @@
-var should = require('should');
 var helper = require('node-red-node-test-helper');
 var shared = require('../shared.js');
 var accountNode = require('../../../nodes/config/account.js');

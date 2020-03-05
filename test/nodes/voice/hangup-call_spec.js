@@ -28,7 +28,10 @@ describe('hangup-call node', function() {
   shared.shouldLoadCorrectly(hangupCallNode, 'hangup-call');
 
   it('should make a proper request to defined API URL', function(done) {
-    var flow = [{ id: 'n1', type: 'hangup-call', account: 'n2' }, { id: 'n2', type: 'account', name: 'test' }];
+    var flow = [
+      { id: 'n1', type: 'hangup-call', account: 'n2' },
+      { id: 'n2', type: 'account', name: 'test' },
+    ];
     var testNodes = [hangupCallNode, accountNode];
     var credentials = {
       n2: {
@@ -45,7 +48,6 @@ describe('hangup-call node', function() {
       .reply(200, {});
 
     helper.load(testNodes, flow, credentials, function() {
-      var n2 = helper.getNode('n2');
       var n1 = helper.getNode('n1');
       n1.on('input', function() {
         var isDone = setInterval(function() {

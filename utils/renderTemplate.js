@@ -32,12 +32,13 @@ module.exports = function(msg, template) {
     var value = msg;
     parts.forEach(function(part) {
       var match = part.match(/^(.+)\[(.+)\]$/);
+      var name;
       if (match) {
-        var name = match[1];
+        name = match[1];
         var index = match[2];
         value = value[name][index];
       } else {
-        var name = part;
+        name = part;
         value = value[name];
       }
     });
