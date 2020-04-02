@@ -53,7 +53,7 @@ module.exports = function(RED) {
     client.api.baseUrl = node.account.credentials.apiUrl;
 
     node.on('input', function(msg) {
-      var absoluteWebhookUrl = url.resolve(this.context().global.get('baseUrl'), node.webhookUrl);
+      var absoluteWebhookUrl = url.resolve(node.context().global.get('baseUrl'), node.webhookUrl);
       var fromNumber;
       var toNumber;
       if (node.fromType === 'msg') {
