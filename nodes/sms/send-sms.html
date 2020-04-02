@@ -1,0 +1,56 @@
+<script type="text/javascript">
+  RED.nodes.registerType('send-sms', {
+    category: 'twilio sms',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: '' },
+      account: { value: '', type: 'account' },
+      text: { value: '', required: true },
+      from: { value: '', required: true, validate: RED.validators.typedInput('fromType') },
+      fromType: { value: 'num' },
+      to: { value: '', required: true, validate: RED.validators.typedInput('toType') },
+      toType: { value: 'num' },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'file.png',
+    label: function() {
+      return this.name || 'send-sms';
+    },
+    oneditprepare: function() {
+      $('#node-input-from').typedInput({ default: this.fromType || 'num', types: ['num', 'msg'] });
+      $('#node-input-to').typedInput({ default: this.toType || 'num', types: ['num', 'msg'] });
+    },
+    oneditsave: function() {
+      this.fromType = $('#node-input-from').typedInput('type');
+      this.toType = $('#node-input-to').typedInput('type');
+    },
+  });
+</script>
+
+<script type="text/x-red" data-template-name="send-sms">
+  <div class="form-row">
+    <label for="node-input-account"><i class="fa fa-user"></i> Account</label>
+    <input type="text" id="node-input-account">
+  </div>
+  <div class="form-row">
+    <label for="node-input-text"><i class="fa fa-align-left"></i> Text</label>
+    <textarea rows="10" style="width: 70%;" id="node-input-text"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-from"><i class="fa fa-tag"></i> From</label>
+    <input type="text" id="node-input-from" style="width: 70%"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-to"><i class="fa fa-tag"></i> To</label>
+    <input type="text" id="node-input-to" style="width: 70%"/>
+  </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="send-sms">
+  <p>Send an SMS.</p>
+</script>
